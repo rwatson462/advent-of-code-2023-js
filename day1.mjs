@@ -1,9 +1,7 @@
-const fs = require('fs');
+import { readfile } from "./readfile.mjs";
+import { first, last } from './utils.mjs';
 
-const first = list => list[0];
-const last = list => list[list.length-1];
-
-const input = fs.readFileSync('./data/1', {encoding: 'utf-8'}).split("\n");
+const input = readfile('./data/1');
 
 // Part 1 example input
 // const input = [
