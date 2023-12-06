@@ -1,5 +1,5 @@
 import { readfile } from "./readfile.mjs";
-import { first, last } from './utils.mjs';
+import { first, last } from './utils.mts';
 
 const input = readfile('./data/1');
 
