@@ -31,30 +31,13 @@ const is_valid_coordinate = (coord: Coordinate, input: string[]): boolean =>
 const get_adjacent_cells = (coord: Coordinate, input: string[]): Coordinate[] => {
     const coords: Coordinate[] = [];
 
-    if (is_valid_coordinate(coordinate(coord.x-1, coord.y-1), input)) {
-        coords.push(coordinate(coord.x-1, coord.y-1))
-    }
-    if (is_valid_coordinate(coordinate(coord.x-1, coord.y), input)) {
-        coords.push(coordinate(coord.x-1, coord.y))
-    }
-    if (is_valid_coordinate(coordinate(coord.x-1, coord.y+1), input)) {
-        coords.push(coordinate(coord.x-1, coord.y+1))
-    }
-    if (is_valid_coordinate(coordinate(coord.x, coord.y-1), input)) {
-        coords.push(coordinate(coord.x, coord.y-1))
-    }
-    if (is_valid_coordinate(coordinate(coord.x, coord.y+1), input)) {
-        coords.push(coordinate(coord.x, coord.y+1))
-    }
-    if (is_valid_coordinate(coordinate(coord.x+1, coord.y-1), input)) {
-        coords.push(coordinate(coord.x+1, coord.y-1))
-    }
-    if (is_valid_coordinate(coordinate(coord.x+1, coord.y), input)) {
-        coords.push(coordinate(coord.x+1, coord.y))
-    }
-    if (is_valid_coordinate(coordinate(coord.x+1, coord.y+1), input)) {
-        coords.push(coordinate(coord.x+1, coord.y+1))
-    }
+    [-1, 0, 1].forEach(x => {
+        [-1, 0, 1].forEach(y => {
+            if (is_valid_coordinate(coordinate(coord.x+x, coord.y+y), input)) {
+                coords.push(coordinate(coord.x+x, coord.y+y))
+            }
+        })
+    })
 
     return coords
 }
