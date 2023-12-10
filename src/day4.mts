@@ -14,7 +14,6 @@ type Scratchcard = {
     winningNumbers: number[],
     myNumbers: number[],
     matches: number[],
-    score: number,
 }
 
 const scratchcard_from_line = (line: string): Scratchcard => {
@@ -42,6 +41,8 @@ const part1 = () => {
     return input
         .map((line: string): number => {
             const scratchcard = scratchcard_from_line(line)
+
+            // the score for a card is 1 doubled for each subsequent match
             return Math.floor(Math.pow(2, scratchcard.matches.length - 1))
         })
         .reduce((acc: number, cur: number) => acc + cur, 0)
@@ -49,23 +50,19 @@ const part1 = () => {
 
 const part2 = () => {
     const input = readfile('./data/4')
-    const scratchcards: number[] = []
 
-    // populate the scratchcardMap
-    input.forEach((line, index) => {
-        scratchcards.push(1)
-    })
+    // pre-fill an array with the count of each scratchcard we have (1 copy of each)
+    const scratchcards: number[] = Array(input.length).fill(1)
 
-    input.forEach((line, index) => {
+    input.forEach((line: string, index: number) => {
         const scratchcard = scratchcard_from_line(line)
 
+        // The number of times to copy this card forwards
         const cards_to_copy = scratchcard.matches.length
 
+        // We create the same number of copies for each copy of _this_ card we have
         for (let cards = 0; cards < scratchcards[index]; cards++) {
             for (let i = 1; i <= cards_to_copy; i++) {
-                if (scratchcards.length < index + i) {
-                    break
-                }
                 scratchcards[index+i]++
             }
         }
